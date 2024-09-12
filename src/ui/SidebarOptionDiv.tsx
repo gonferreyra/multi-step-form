@@ -19,7 +19,7 @@ export default function SidebarOptionDiv({
         <a
           href={`#${step}`}
           className={clsx(
-            'flex h-10 w-10 items-center justify-center rounded-full border-2 font-bold',
+            'flex h-10 w-10 items-center justify-center rounded-full border font-bold transition',
             {
               'bg-light-blue': stepNumber === step,
               'text-white': stepNumber !== step,
