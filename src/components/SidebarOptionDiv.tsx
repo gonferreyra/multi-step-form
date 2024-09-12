@@ -1,21 +1,19 @@
 import clsx from 'clsx';
+import { useActiveId } from '../lib/hooks';
 
 type SidebarOptionDivProps = {
   number: number;
-  stepNumber: number;
   stepInfo: string;
   step: number;
 };
 
 export default function SidebarOptionDiv({
   number,
-  stepNumber,
   stepInfo,
   step,
 }: SidebarOptionDivProps) {
+  const stepNumber = useActiveId();
   return (
-    // Todo: make active class that has bg-light-blue and text-black
-
     <div className="flex items-center gap-4">
       <div>
         <a
