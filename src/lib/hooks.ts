@@ -5,9 +5,15 @@ export function useActiveId() {
 
   useEffect(() => {
     const handleHashChange = () => {
-      const stepId = window.location.hash.slice(1);
-      setActiveStep(Number(stepId));
+      let stepId = 1;
+      if (!window.location.hash) {
+        setActiveStep(stepId);
+      } else {
+        stepId = Number(window.location.hash.slice(1));
+        setActiveStep(stepId);
+      }
     };
+    handleHashChange();
 
     window.addEventListener('hashchange', handleHashChange);
 

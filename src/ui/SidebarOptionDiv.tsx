@@ -1,28 +1,27 @@
 import clsx from 'clsx';
-import { useActiveId } from '../lib/hooks';
 
 type SidebarOptionDivProps = {
   number: number;
   stepInfo: string;
-  step: number;
+  isActive: boolean;
 };
 
 export default function SidebarOptionDiv({
   number,
   stepInfo,
-  step,
+
+  isActive,
 }: SidebarOptionDivProps) {
-  const stepNumber = useActiveId();
   return (
     <div className="flex items-center gap-4">
       <div>
         <a
-          href={`#${step}`}
+          href={`#${number}`}
           className={clsx(
             'flex h-10 w-10 items-center justify-center rounded-full border font-bold transition',
             {
-              'bg-light-blue': stepNumber === step,
-              'text-white': stepNumber !== step,
+              'bg-light-blue': isActive,
+              'text-white': !isActive,
             },
           )}
         >
@@ -30,7 +29,7 @@ export default function SidebarOptionDiv({
         </a>
       </div>
       <div className="hidden lg:block">
-        <p>Step {stepNumber}</p>
+        <p>Step {number}</p>
         <p>{stepInfo}</p>
       </div>
     </div>

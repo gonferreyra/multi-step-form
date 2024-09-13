@@ -7,7 +7,7 @@ import PlanCard from '../ui/PlanCard';
 import PlanSwitch from '../ui/PlanSwitch';
 
 export default function Form() {
-  const stepNumber = useActiveId();
+  const activeStep = useActiveId();
   const [planTime, setPlanTime] = useState('year');
   const [isChecked, setIsChecked] = useState(false);
 
@@ -19,7 +19,7 @@ export default function Form() {
   return (
     <form className="absolute -top-20 left-0 right-0 flex min-h-[calc(100vh-120px)] flex-col gap-6">
       {/* Step 1 */}
-      {stepNumber === 1 && (
+      {activeStep === 1 && (
         <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md">
           <FormTitle>Personal info</FormTitle>
 
@@ -76,7 +76,7 @@ export default function Form() {
       )}
 
       {/* Step 2 */}
-      {stepNumber === 2 && (
+      {activeStep === 2 && (
         <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
           <FormTitle>Select your plan</FormTitle>
           <FormSubtitle>
@@ -91,16 +91,22 @@ export default function Form() {
         </div>
       )}
 
-      <div className="mt-auto flex w-full justify-between bg-alabaster px-2">
-        {stepNumber > 1 && (
-          <button className="rounded-md p-3 font-bold text-cool-gray">
+      <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2">
+        {activeStep > 1 && (
+          <a
+            href={`#${activeStep - 1}`}
+            className="rounded-md p-3 font-bold text-cool-gray"
+          >
             Go Back
-          </button>
+          </a>
         )}
 
-        <button className="my-4 ml-auto rounded-md bg-marine-blue p-3 font-bold text-alabaster">
+        <a
+          href={`#${activeStep + 1}`}
+          className="my-4 ml-auto rounded-md bg-marine-blue p-3 font-bold text-alabaster"
+        >
           Next Step
-        </button>
+        </a>
       </div>
     </form>
   );
