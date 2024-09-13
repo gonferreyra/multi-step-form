@@ -1,20 +1,14 @@
+import Form from './components/Form';
 import Sidebar from './components/Sidebar';
 
 function App() {
   return (
     <>
-      {/* 
-        sidebar absolute
-
-        main 
-            form
-            footer
-        main
-
-        desktop? 
-      */}
-
       <Sidebar />
+
+      <main className="relative">
+        <Form />
+      </main>
     </>
   );
 }
