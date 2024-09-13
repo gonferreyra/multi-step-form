@@ -1,4 +1,4 @@
-import SidebarOptionDiv from './SidebarOptionDiv';
+import SidebarOptionDiv from '../ui/SidebarOptionDiv';
 
 export default function Sidebar() {
   return (
