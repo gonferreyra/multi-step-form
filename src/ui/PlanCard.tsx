@@ -1,18 +1,43 @@
-export default function PlanCard({ ...props }) {
+import clsx from 'clsx';
+
+type PlanCardProps = {
+  name: string;
+  icon: string;
+  planTime: string;
+  priceMonth: number;
+  priceYear: number;
+  isSelected: boolean;
+  onToggle: () => void;
+};
+
+export default function PlanCard({
+  name,
+  icon,
+  planTime,
+  priceMonth,
+  priceYear,
+  isSelected,
+  onToggle,
+}: PlanCardProps) {
   return (
-    <div className="flex items-center gap-4 rounded-md border px-4 py-2">
+    <div
+      className={clsx('flex items-center gap-4 rounded-md border px-4 py-2', {
+        'border-purplish-blue': isSelected,
+      })}
+      onClick={onToggle}
+    >
       <div>
         <i>
-          <img src={props.icon} alt={`${props.title} icon`} />
+          <img src={icon} alt={`${name} icon`} />
         </i>
       </div>
       <div>
-        <h2 className="font-bold text-marine-blue">{props.name}</h2>
+        <h2 className="font-bold text-marine-blue">{name}</h2>
         <p className="text-sm text-cool-gray">
-          {props.planTime === 'month' && `$${props.priceMonth}/mo`}
-          {props.planTime === 'year' && `$${props.priceYear}/yr`}
+          {planTime === 'month' && `$${priceMonth}/mo`}
+          {planTime === 'year' && `$${priceYear}/yr`}
         </p>
-        {props.planTime === 'year' && (
+        {planTime === 'year' && (
           <p className="mt-1 text-xs text-marine-blue">2 months free</p>
         )}
       </div>

@@ -2,18 +2,30 @@ import { useState } from 'react';
 import { useActiveId } from '../lib/hooks';
 import FormSubtitle from '../ui/FormSubtitle';
 import FormTitle from '../ui/FormTitle';
-import { plans } from '../lib/constants';
+import { addOns, plans } from '../lib/constants';
 import PlanCard from '../ui/PlanCard';
 import PlanSwitch from '../ui/PlanSwitch';
+import AddOnCard from '../ui/AddOnCard';
 
 export default function Form() {
   const activeStep = useActiveId();
-  const [planTime, setPlanTime] = useState('year');
+  const [planTime, setPlanTime] = useState('month');
   const [isChecked, setIsChecked] = useState(false);
+
+  //second step
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
     setPlanTime(isChecked ? 'month' : 'year');
+  };
+
+  const handleTogglePlan = (option: string) => {
+    if (option !== selectedOption) {
+      setSelectedOption(option);
+    } else {
+      setSelectedOption(null);
+    }
   };
 
   return (
@@ -84,10 +96,31 @@ export default function Form() {
           </FormSubtitle>
 
           {plans.map((plan) => (
-            <PlanCard key={plan.name} {...plan} planTime={planTime} />
+            <PlanCard
+              key={plan.name}
+              {...plan}
+              planTime={planTime}
+              isSelected={selectedOption === plan.name}
+              onToggle={() => handleTogglePlan(plan.name)}
+            />
           ))}
 
           <PlanSwitch isChecked={isChecked} onToggle={handleToggle} />
+        </div>
+      )}
+
+      {/* Step 3 */}
+      {activeStep === 3 && (
+        <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
+          <FormTitle>Add-ons</FormTitle>
+          <FormSubtitle>
+            Add-ons help enhace your gaming experience.
+          </FormSubtitle>
+          {/* addon-card component */}
+
+          {addOns.map((addon) => (
+            <AddOnCard key={addon.name} {...addon} planTime={planTime} />
+          ))}
         </div>
       )}
 
