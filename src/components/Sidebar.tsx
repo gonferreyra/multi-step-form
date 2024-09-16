@@ -21,7 +21,7 @@ const sidebarOptions = [
 ];
 
 export default function Sidebar() {
-  const activeStep = useActiveId();
+  const { activeStep } = useActiveId();
   return (
     <aside className="min-h-[200px] bg-sidebar-mobile bg-cover bg-no-repeat">
       <div className="flex justify-center gap-6 pt-12">
