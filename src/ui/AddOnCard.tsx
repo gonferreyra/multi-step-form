@@ -1,13 +1,29 @@
 import { useState } from 'react';
 import clsx from 'clsx';
 
-export default function AddOnCard({ ...props }) {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+type AddOnCardProps = {
+  name: string;
+  description: string;
+  priceMonth: number;
+  priceYear: number;
+  planTime: string;
+  onSelect: (name: string, selected: boolean) => void;
+};
+
+export default function AddOnCard({
+  onSelect,
+  name,
+  description,
+  priceMonth,
+  priceYear,
+  planTime,
+}: AddOnCardProps) {
   const [addOnSelected, setAddOnSelected] = useState(false);
 
-  const handleToggle = (option: string) => {
+  const handleToggle = () => {
     setAddOnSelected(!addOnSelected);
-    setSelectedOption(option);
+    // setSelectedOption(option);
+    onSelect(name, !addOnSelected);
   };
 
   return (
@@ -15,26 +31,26 @@ export default function AddOnCard({ ...props }) {
       className={clsx('flex items-center gap-4 rounded-md border px-4 py-3', {
         'border-purplish-blue': addOnSelected,
       })}
-      onClick={() => handleToggle(props.name)}
+      onClick={handleToggle}
     >
       <div>
         <input
           type="checkbox"
           className="h-4 w-4"
           checked={addOnSelected}
-          onChange={() => handleToggle(props.name)}
+          onChange={handleToggle}
         />
       </div>
       <div className="flex w-full items-center justify-between">
         <div>
-          <h2 className="font-semibold text-marine-blue">{props.name}</h2>
-          <p className="text-xs text-cool-gray">{props.description}</p>
+          <h2 className="font-semibold text-marine-blue">{name}</h2>
+          <p className="text-xs text-cool-gray">{description}</p>
         </div>
         <div>
           <p className="text-sm font-medium text-purplish-blue">
             <span>
-              {props.planTime === 'month' && `$${props.priceMonth}/mo`}
-              {props.planTime === 'year' && `$${props.priceYear}/yr`}
+              {planTime === 'month' && `$${priceMonth}/mo`}
+              {planTime === 'year' && `$${priceYear}/yr`}
             </span>
           </p>
         </div>

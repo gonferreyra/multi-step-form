@@ -12,8 +12,11 @@ export default function Form() {
   const [planTime, setPlanTime] = useState('month');
   const [isChecked, setIsChecked] = useState(false);
 
-  //second step
+  //  second step
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  // third step
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
 
   const handleToggle = () => {
     setIsChecked(!isChecked);
@@ -25,6 +28,14 @@ export default function Form() {
       setSelectedOption(option);
     } else {
       setSelectedOption(null);
+    }
+  };
+
+  const handleSelectAddOn = (name: string, selected: boolean) => {
+    if (selected) {
+      setSelectedAddOns([...selectedAddOns, name]);
+    } else {
+      setSelectedAddOns(selectedAddOns.filter((addOn) => addOn !== name));
     }
   };
 
@@ -119,7 +130,12 @@ export default function Form() {
           {/* addon-card component */}
 
           {addOns.map((addon) => (
-            <AddOnCard key={addon.name} {...addon} planTime={planTime} />
+            <AddOnCard
+              key={addon.name}
+              {...addon}
+              planTime={planTime}
+              onSelect={handleSelectAddOn}
+            />
           ))}
         </div>
       )}
