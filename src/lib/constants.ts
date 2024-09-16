@@ -24,3 +24,24 @@ export const plans = [
     // selected: false,
   },
 ];
+
+export const addOns = [
+  {
+    name: 'Online service',
+    description: 'Access to multiplayer games',
+    priceMonth: 1,
+    priceYear: 10,
+  },
+  {
+    name: 'Larger storage',
+    description: 'Extra 1TB of cloud save',
+    priceMonth: 2,
+    priceYear: 20,
+  },
+  {
+    name: 'Customizable profile',
+    description: 'Custom theme on your profile',
+    priceMonth: 2,
+    priceYear: 20,
+  },
+];
