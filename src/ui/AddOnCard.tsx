@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 type AddOnCardProps = {
@@ -8,6 +8,7 @@ type AddOnCardProps = {
   priceYear: number;
   planTime: string;
   onSelect: (name: string, selected: boolean) => void;
+  selected: boolean;
 };
 
 export default function AddOnCard({
@@ -17,12 +18,16 @@ export default function AddOnCard({
   priceMonth,
   priceYear,
   planTime,
+  selected,
 }: AddOnCardProps) {
-  const [addOnSelected, setAddOnSelected] = useState(false);
+  const [addOnSelected, setAddOnSelected] = useState(selected);
+
+  useEffect(() => {
+    setAddOnSelected(selected);
+  }, [selected]);
 
   const handleToggle = () => {
     setAddOnSelected(!addOnSelected);
-    // setSelectedOption(option);
     onSelect(name, !addOnSelected);
   };
 

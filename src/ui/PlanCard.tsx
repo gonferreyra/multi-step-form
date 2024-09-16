@@ -34,10 +34,10 @@ export default function PlanCard({
       <div>
         <h2 className="font-bold text-marine-blue">{name}</h2>
         <p className="text-sm text-cool-gray">
-          {planTime === 'month' && `$${priceMonth}/mo`}
-          {planTime === 'year' && `$${priceYear}/yr`}
+          {planTime === 'monthly' && `$${priceMonth}/mo`}
+          {planTime === 'yearly' && `$${priceYear}/yr`}
         </p>
-        {planTime === 'year' && (
+        {planTime === 'yearly' && (
           <p className="mt-1 text-xs text-marine-blue">2 months free</p>
         )}
       </div>
