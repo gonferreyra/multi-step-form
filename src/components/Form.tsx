@@ -236,6 +236,19 @@ export default function Form() {
       )}
 
       {/* Step 5 */}
+      {activeStep === 5 && (
+        <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
+          <i className="mx-auto my-4">
+            <img src="/icon-thank-you.svg" alt="thank you icon" />
+          </i>
+          <FormTitle className="text-center">Thank you!</FormTitle>
+          <FormSubtitle className="text-center">
+            Thanks for confirming your subscription! We hope you have fun using
+            our platform. If you ever want to cancel your subscription, you can
+            do so within the proflie settings.
+          </FormSubtitle>
+        </div>
+      )}
 
       {/* Buttons */}
       <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2">

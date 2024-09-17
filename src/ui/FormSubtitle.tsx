@@ -1,7 +1,13 @@
+import { cn } from '../lib/utils';
+
+type FormSubtitleProps = {
+  children: React.ReactNode;
+  className?: string;
+};
+
 export default function FormSubtitle({
   children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <p className="text-cool-gray">{children}</p>;
+  className,
+}: FormSubtitleProps) {
+  return <p className={cn('text-cool-gray', className)}>{children}</p>;
 }
