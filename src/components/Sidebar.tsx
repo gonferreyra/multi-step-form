@@ -1,4 +1,3 @@
-import { useActiveId } from '../lib/hooks';
 import SidebarOptionDiv from '../ui/SidebarOptionDiv';
 
 const sidebarOptions = [
@@ -20,8 +19,7 @@ const sidebarOptions = [
   },
 ];
 
-export default function Sidebar() {
-  const { activeStep } = useActiveId();
+export default function Sidebar({ activeStep }) {
   return (
     <aside className="min-h-[200px] bg-sidebar-mobile bg-cover bg-no-repeat">
       <div className="flex justify-center gap-6 pt-12">

@@ -1,13 +1,19 @@
+import { useState } from 'react';
 import Form from './components/Form';
 import Sidebar from './components/Sidebar';
 
 function App() {
+  const [activeStep, setActiveStep] = useState(1);
+
+  const handleActiveStep = (step: number) => {
+    setActiveStep(step);
+  };
   return (
     <>
-      <Sidebar />
+      <Sidebar activeStep={activeStep} />
 
       <main className="relative">
-        <Form />
+        <Form activeStep={activeStep} handleActiveStep={handleActiveStep} />
       </main>
     </>
   );
