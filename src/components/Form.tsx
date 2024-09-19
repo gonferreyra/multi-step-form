@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useActiveId } from '../lib/hooks';
 import {
   FormStep1,
   FormStep2,
@@ -9,24 +8,38 @@ import {
 } from './FormSteps';
 import { FormProvider, useForm } from 'react-hook-form';
 
+type FormProps = {
+  activeStep: number;
+  handleActiveStep: (step: number) => void;
+};
+
 type FormValues = {
   name: string;
   email: string;
   phonenumber: string;
+  selectedPlan: string | null;
+  selectedAddOns: string[] | null;
 };
 
-export default function Form({ activeStep, handleActiveStep }) {
+export default function Form({ activeStep, handleActiveStep }: FormProps) {
   const methods = useForm<FormValues>({
+    // initialice only this value
+    defaultValues: {
+      selectedAddOns: [],
+    },
     shouldUnregister: false,
   });
   const {
     formState: { errors },
   } = methods;
+
+  // See if i can remove one of this states
   const [planTime, setPlanTime] = useState('monthly');
   const [isChecked, setIsChecked] = useState(false);
 
   //  second step
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  // const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  // console.log(selectedPlan);
 
   // third step
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
@@ -35,15 +48,6 @@ export default function Form({ activeStep, handleActiveStep }) {
   const handleToggle = () => {
     setIsChecked(!isChecked);
     setPlanTime(isChecked ? 'monthly' : 'yearly');
-  };
-
-  // second step
-  const handleSelectPlan = (option: string) => {
-    if (option !== selectedPlan) {
-      setSelectedPlan(option);
-    } else {
-      setSelectedPlan(null);
-    }
   };
 
   // third step
@@ -61,12 +65,32 @@ export default function Form({ activeStep, handleActiveStep }) {
   ) => {
     e.preventDefault();
     // Validate fields on first step
-    const isStepValid = await methods.trigger(['name', 'email', 'phonenumber']);
+    if (activeStep === 1) {
+      const isStepValid = await methods.trigger([
+        'name',
+        'email',
+        'phonenumber',
+      ]);
 
-    if (isStepValid) {
-      handleActiveStep(activeStep + 1); // next step
-    } else {
-      console.log('Error al validar campos');
+      if (isStepValid) {
+        handleActiveStep(activeStep + 1); // next step
+      } else {
+        console.log('Error validating fields on first step');
+      }
+    }
+
+    if (activeStep === 2) {
+      // Validate fields on second step
+      const isStep2Valid = await methods.trigger(['selectedPlan']);
+      if (isStep2Valid) {
+        handleActiveStep(activeStep + 1); // next step
+      } else {
+        console.log('Error validating fields on second step');
+      }
+    }
+
+    if (activeStep === 3) {
+      handleActiveStep(activeStep + 1);
     }
   };
 
@@ -76,20 +100,22 @@ export default function Form({ activeStep, handleActiveStep }) {
 
     console.log('Errores: ', methods.formState.errors);
 
+    console.log(data);
+
     if (!isFormValid) {
-      // Redirigir al paso correspondiente según el primer campo con error
+      // Redirect to the first error step - Unused for now since the form is validated on every step
       if (errors.name || errors.email || errors.phonenumber) {
         handleActiveStep(1); // Redirige al primer paso
+      } else if (errors.selectedPlan) {
+        handleActiveStep(2); // Redirige al segundo paso si el plan no está seleccionado
+        // } else if (errors.selectedAddOns) {
+        //   handleActiveStep(3); // Redirige al tercer paso si falta algo en los add-ons
       }
-      // else if (errors.selectedPlan) {
-      //   handleActiveStep(2); // Redirige al segundo paso si el plan no está seleccionado
-      // } else if (errors.selectedAddOns) {
-      //   handleActiveStep(3); // Redirige al tercer paso si falta algo en los add-ons
-      // }
 
       console.log('Errores en el formulario. No se puede continuar.');
     } else {
       console.log('Formulario válido. Enviando datos...');
+      console.log(data);
       handleActiveStep(activeStep + 1); // Avanza al siguiente paso si no hay errores
     }
   };
@@ -113,8 +139,8 @@ export default function Form({ activeStep, handleActiveStep }) {
         {/* Step 2 */}
         {activeStep === 2 ? (
           <FormStep2
-            handleSelectPlan={handleSelectPlan}
-            selectedPlan={selectedPlan}
+            // handleSelectPlan={handleSelectPlan}
+            // selectedPlan={selectedPlan}
             planTime={planTime}
             isChecked={isChecked}
             handleToggle={handleToggle}
@@ -122,8 +148,8 @@ export default function Form({ activeStep, handleActiveStep }) {
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
             <FormStep2
-              handleSelectPlan={handleSelectPlan}
-              selectedPlan={selectedPlan}
+              // handleSelectPlan={handleSelectPlan}
+              // selectedPlan={selectedPlan}
               planTime={planTime}
               isChecked={isChecked}
               handleToggle={handleToggle}
@@ -150,19 +176,12 @@ export default function Form({ activeStep, handleActiveStep }) {
 
         {/* Step 4 */}
         {activeStep === 4 ? (
-          <FormStep4
-            selectedPlan={selectedPlan}
-            planTime={planTime}
-            handleActiveStep={handleActiveStep}
-            selectedAddOns={selectedAddOns}
-          />
+          <FormStep4 planTime={planTime} handleActiveStep={handleActiveStep} />
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
             <FormStep4
-              selectedPlan={selectedPlan}
               planTime={planTime}
               handleActiveStep={handleActiveStep}
-              selectedAddOns={selectedAddOns}
             />
           </div>
         )}
@@ -171,34 +190,36 @@ export default function Form({ activeStep, handleActiveStep }) {
         {activeStep === 5 && <FormStep5 />}
 
         {/* Buttons */}
-        <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2">
-          {activeStep > 1 && (
-            <button
-              type="button"
-              className="rounded-md p-3 font-bold text-cool-gray"
-              onClick={() => handleActiveStep(activeStep - 1)}
-            >
-              Go Back
-            </button>
-          )}
+        {activeStep !== 5 && (
+          <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2">
+            {activeStep > 1 && (
+              <button
+                type="button"
+                className="rounded-md p-3 font-bold text-cool-gray"
+                onClick={() => handleActiveStep(activeStep - 1)}
+              >
+                Go Back
+              </button>
+            )}
 
-          {activeStep === 4 ? (
-            <button
-              type="submit"
-              className="my-4 ml-auto rounded-md bg-purplish-blue p-3 font-bold text-alabaster"
-            >
-              Confirm
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="my-4 ml-auto rounded-md bg-marine-blue p-3 font-bold text-alabaster"
-              onClick={(e) => handleNextStep(e)}
-            >
-              Next Step
-            </button>
-          )}
-        </div>
+            {activeStep === 4 ? (
+              <button
+                type="submit"
+                className="my-4 ml-auto rounded-md bg-purplish-blue p-3 font-bold text-alabaster"
+              >
+                Confirm
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="my-4 ml-auto rounded-md bg-marine-blue p-3 font-bold text-alabaster"
+                onClick={(e) => handleNextStep(e)}
+              >
+                Next Step
+              </button>
+            )}
+          </div>
+        )}
       </form>
     </FormProvider>
   );

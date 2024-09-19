@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
+import { useFormContext } from 'react-hook-form';
 
 type AddOnCardProps = {
   name: string;
@@ -20,6 +21,7 @@ export default function AddOnCard({
   planTime,
   selected,
 }: AddOnCardProps) {
+  const { register, setValue } = useFormContext();
   const [addOnSelected, setAddOnSelected] = useState(selected);
 
   useEffect(() => {
@@ -27,7 +29,8 @@ export default function AddOnCard({
   }, [selected]);
 
   const handleToggle = () => {
-    setAddOnSelected(!addOnSelected);
+    // setAddOnSelected(!addOnSelected);
+    setValue(`selectedAddOns.${name}`, !addOnSelected);
     onSelect(name, !addOnSelected);
   };
 
@@ -40,6 +43,7 @@ export default function AddOnCard({
     >
       <div>
         <input
+          {...register(`selectedAddOns.${name}`)}
           type="checkbox"
           className="h-4 w-4"
           checked={addOnSelected}

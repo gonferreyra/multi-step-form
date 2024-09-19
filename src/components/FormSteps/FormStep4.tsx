@@ -1,20 +1,26 @@
+import { useFormContext } from 'react-hook-form';
 import { addOns, plans } from '../../lib/constants';
 import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
 
 type FormStep4Props = {
-  selectedPlan: string | null;
   planTime: string;
   handleActiveStep: (step: number) => void;
-  selectedAddOns: string[];
 };
 
 export default function FormStep4({
-  selectedPlan,
   planTime,
   handleActiveStep,
-  selectedAddOns,
 }: FormStep4Props) {
+  const { watch } = useFormContext();
+
+  // const { selectedAddOns, selectedPlan } = getValues();
+  // console.log(watch('selectedPlan'));
+
+  // Usa watch para observar los cambios de selectedAddOns y selectedPlan
+  const selectedAddOns = watch('selectedAddOns', []);
+  const selectedPlan = watch('selectedPlan', null);
+
   const getPlanPrice = () => {
     const plan = plans.find((a) => a.name === selectedPlan);
     if (plan) {
@@ -31,9 +37,16 @@ export default function FormStep4({
     return 0;
   };
 
-  const total =
-    getPlanPrice() +
-    selectedAddOns.reduce((total, addOn) => total + getAddOnPrice(addOn), 0);
+  const total = () => {
+    const planPrice = getPlanPrice();
+    const addOnPrice = Object.keys(selectedAddOns).reduce((acc, addOn) => {
+      if (selectedAddOns[addOn]) {
+        return acc + getAddOnPrice(addOn);
+      }
+      return acc;
+    }, 0);
+    return planPrice + addOnPrice;
+  };
 
   return (
     <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
@@ -65,14 +78,39 @@ export default function FormStep4({
         </div>
         <div className="mb-4 mt-4 border-t" />
         <div className="">
-          {selectedAddOns.map((addOn) => (
-            <div key={addOn} className="mt-4 flex items-center justify-between">
-              <p className="text-sm font-semibold text-cool-gray">{addOn}</p>
+          {selectedAddOns['Online service'] && (
+            <div className="mt-4 flex items-center justify-between">
+              <p className="text-sm font-semibold text-cool-gray">
+                Online service
+              </p>
               <p className="text-sm text-marine-blue">
-                +${getAddOnPrice(addOn)}/{planTime === 'yearly' ? 'yr' : 'mo'}
+                +${getAddOnPrice('Online service')}/
+                {planTime === 'yearly' ? 'yr' : 'mo'}
               </p>
             </div>
-          ))}
+          )}
+          {selectedAddOns['Larger storage'] && (
+            <div className="mt-4 flex items-center justify-between">
+              <p className="text-sm font-semibold text-cool-gray">
+                Larger storage
+              </p>
+              <p className="text-sm text-marine-blue">
+                +${getAddOnPrice('Larger storage')}/
+                {planTime === 'yearly' ? 'yr' : 'mo'}
+              </p>
+            </div>
+          )}
+          {selectedAddOns['Customizable profile'] && (
+            <div className="mt-4 flex items-center justify-between">
+              <p className="text-sm font-semibold text-cool-gray">
+                Customizable profile
+              </p>
+              <p className="text-sm text-marine-blue">
+                +${getAddOnPrice('Customizable profile')}/
+                {planTime === 'yearly' ? 'yr' : 'mo'}
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-3 flex items-center justify-between px-4">
@@ -80,7 +118,7 @@ export default function FormStep4({
           Total (per month)
         </p>
         <p className="font-semibold text-purplish-blue">
-          +${total}/{planTime === 'yearly' ? 'yr' : 'mo'}
+          +${total()}/{planTime === 'yearly' ? 'yr' : 'mo'}
         </p>
       </div>
     </div>

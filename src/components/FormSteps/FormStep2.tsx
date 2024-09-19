@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { plans } from '../../lib/constants';
 import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
@@ -5,20 +6,34 @@ import PlanCard from '../../ui/PlanCard';
 import PlanSwitch from '../../ui/PlanSwitch';
 
 type FormStep2Props = {
-  handleSelectPlan: (plan: string) => void;
-  selectedPlan: string | null;
+  // handleSelectPlan: (plan: string) => void;
+  // selectedPlan: string | null;
   planTime: string;
   isChecked: boolean;
   handleToggle: () => void;
 };
 
 export default function FormStep2({
-  handleSelectPlan,
-  selectedPlan,
+  // handleSelectPlan,
+  // selectedPlan,
   planTime,
   isChecked,
   handleToggle,
 }: FormStep2Props) {
+  const {
+    register,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+  // console.log(formState);
+
+  const selectedPlan = watch('selectedPlan');
+
+  const handleSelectPlan = (plan: string) => {
+    setValue('selectedPlan', plan); // update value in form
+  };
+
   return (
     <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
       <FormTitle>Select your plan</FormTitle>
@@ -36,7 +51,25 @@ export default function FormStep2({
         />
       ))}
 
+      {/* Errors on not selecting plan */}
+      {errors.selectedPlan && (
+        <span className="text-sm font-semibold text-red-500">
+          Please select a plan
+        </span>
+      )}
+
       <PlanSwitch isChecked={isChecked} onToggle={handleToggle} />
+
+      {/* Invisible input for register */}
+      <input
+        type="hidden"
+        {...register('selectedPlan', {
+          required: {
+            value: true,
+            message: 'Please select a plan',
+          },
+        })}
+      />
     </div>
   );
 }
