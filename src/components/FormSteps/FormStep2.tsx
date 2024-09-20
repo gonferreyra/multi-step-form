@@ -30,7 +30,7 @@ export default function FormStep2({
   };
 
   return (
-    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-full lg:shadow-none">
+    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-full lg:px-0 lg:shadow-none">
       <FormTitle>Select your plan</FormTitle>
       <FormSubtitle>
         You have the option of monthly or yearly billing
