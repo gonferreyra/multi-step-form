@@ -4,4 +4,13 @@
 
 body {
   background-color: hsl(206, 94%, 87%);
+  height: 100vh;
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

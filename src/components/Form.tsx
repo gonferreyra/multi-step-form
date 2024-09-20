@@ -124,7 +124,7 @@ export default function Form({ activeStep, handleActiveStep }: FormProps) {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="absolute -top-20 left-0 right-0 flex min-h-[calc(100vh-120px)] flex-col gap-6"
+        className="absolute -top-20 left-0 right-0 flex min-h-[calc(100vh-120px)] flex-col gap-6 lg:static lg:min-h-full lg:justify-center"
         noValidate
       >
         {/* Step 1 */}

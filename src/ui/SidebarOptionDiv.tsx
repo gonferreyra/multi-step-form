@@ -1,5 +1,4 @@
 import clsx from 'clsx';
-import { useActiveStep } from '../lib/hooks';
 
 type SidebarOptionDivProps = {
   number: number;
@@ -27,9 +26,9 @@ export default function SidebarOptionDiv({
           {number}
         </div>
       </div>
-      <div className="hidden lg:block">
-        <p>Step {number}</p>
-        <p>{stepInfo}</p>
+      <div className="hidden text-alabaster md:block">
+        <p className="text-sm uppercase text-cool-gray">Step {number}</p>
+        <p className="font-semibold">{stepInfo}</p>
       </div>
     </div>
   );

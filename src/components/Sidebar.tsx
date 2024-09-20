@@ -19,10 +19,10 @@ const sidebarOptions = [
   },
 ];
 
-export default function Sidebar({ activeStep }) {
+export default function Sidebar({ activeStep }: { activeStep: number }) {
   return (
-    <aside className="min-h-[200px] bg-sidebar-mobile bg-cover bg-no-repeat">
-      <div className="flex justify-center gap-6 pt-12">
+    <aside className="min-h-[200px] bg-sidebar-mobile bg-cover bg-no-repeat lg:w-full lg:basis-2/6 lg:rounded-lg lg:bg-sidebar-desktop">
+      <div className="flex justify-center gap-6 pt-12 lg:flex-col lg:px-6">
         {sidebarOptions.map(({ number, stepInfo }) => (
           <SidebarOptionDiv
             key={number}
