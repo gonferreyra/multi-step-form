@@ -7,7 +7,7 @@ type PlanSwitchProps = {
 
 export default function PlanSwitch({ isChecked, onToggle }: PlanSwitchProps) {
   return (
-    <div className="flex items-center justify-center space-x-4 rounded-lg bg-gray-100 p-4">
+    <div className="flex items-center justify-center space-x-4 rounded-lg bg-gray-100 p-4 lg:mt-4">
       <span
         className={clsx('font-bold text-cool-gray', {
           'text-marine-blue': !isChecked,

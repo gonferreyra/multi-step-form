@@ -30,21 +30,23 @@ export default function FormStep2({
   };
 
   return (
-    <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
+    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-full lg:shadow-none">
       <FormTitle>Select your plan</FormTitle>
       <FormSubtitle>
         You have the option of monthly or yearly billing
       </FormSubtitle>
 
-      {plans.map((plan) => (
-        <PlanCard
-          key={plan.name}
-          {...plan}
-          planTime={planTime}
-          isSelected={selectedPlan === plan.name}
-          onToggle={() => handleSelectPlan(plan.name)}
-        />
-      ))}
+      <div className="flex flex-col gap-4 lg:flex-row">
+        {plans.map((plan) => (
+          <PlanCard
+            key={plan.name}
+            {...plan}
+            planTime={planTime}
+            isSelected={selectedPlan === plan.name}
+            onToggle={() => handleSelectPlan(plan.name)}
+          />
+        ))}
+      </div>
 
       {/* Errors on not selecting plan */}
       {errors.selectedPlan && (

@@ -21,9 +21,12 @@ export default function PlanCard({
 }: PlanCardProps) {
   return (
     <div
-      className={clsx('flex items-center gap-4 rounded-md border px-4 py-2', {
-        'border-purplish-blue': isSelected,
-      })}
+      className={clsx(
+        'flex items-center gap-4 rounded-md border px-4 py-2 pr-6 hover:border-purplish-blue lg:w-[120px] lg:flex-col lg:items-start lg:gap-8',
+        {
+          'border-purplish-blue': isSelected,
+        },
+      )}
       onClick={onToggle}
     >
       <div>

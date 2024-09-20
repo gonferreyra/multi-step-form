@@ -9,7 +9,7 @@ function App() {
     setActiveStep(step);
   };
   return (
-    <div className="mx-auto h-screen flex-row lg:flex lg:h-auto lg:w-full lg:max-w-4xl lg:gap-12 lg:bg-alabaster lg:p-12">
+    <div className="mx-auto h-screen flex-row lg:flex lg:h-[580px] lg:w-[820px] lg:gap-12 lg:bg-alabaster lg:p-12">
       <Sidebar activeStep={activeStep} />
 
       <main className="relative min-h-[calc(100vh-200px)]">
