@@ -22,9 +22,9 @@ export default function PlanCard({
   return (
     <div
       className={clsx(
-        'flex items-center gap-4 rounded-md border px-4 py-2 pr-6 hover:border-purplish-blue lg:w-[120px] lg:flex-col lg:items-start lg:gap-8',
+        'flex cursor-pointer items-center gap-4 rounded-md border px-4 py-2 pr-6 transition hover:border-purplish-blue lg:w-[120px] lg:flex-col lg:items-start lg:gap-8',
         {
-          'border-purplish-blue': isSelected,
+          'border-purplish-blue bg-pastel-blue/20': isSelected,
         },
       )}
       onClick={onToggle}
