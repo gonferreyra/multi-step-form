@@ -7,11 +7,7 @@ import {
   FormStep5,
 } from './FormSteps';
 import { FormProvider, useForm } from 'react-hook-form';
-
-type FormProps = {
-  activeStep: number;
-  handleActiveStep: (step: number) => void;
-};
+import useStore from '../store/formStore';
 
 type FormValues = {
   name: string;
@@ -21,7 +17,7 @@ type FormValues = {
   selectedAddOns: string[] | null;
 };
 
-export default function Form({ activeStep, handleActiveStep }: FormProps) {
+export default function Form() {
   const methods = useForm<FormValues>({
     // initialice only this value
     defaultValues: {
@@ -32,6 +28,8 @@ export default function Form({ activeStep, handleActiveStep }: FormProps) {
   const {
     formState: { errors },
   } = methods;
+  const activeStep = useStore.use.activeStep();
+  const handleActiveStep = useStore.use.setActiveStep();
 
   // See if i can remove one of this states
   const [planTime, setPlanTime] = useState('monthly');

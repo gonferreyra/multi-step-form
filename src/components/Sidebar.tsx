@@ -1,4 +1,5 @@
 import SidebarOptionDiv from '../ui/SidebarOptionDiv';
+import useStore from '../store/formStore';
 
 const sidebarOptions = [
   {
@@ -19,7 +20,9 @@ const sidebarOptions = [
   },
 ];
 
-export default function Sidebar({ activeStep }: { activeStep: number }) {
+export default function Sidebar() {
+  const activeStep = useStore.use.activeStep();
+
   return (
     <aside className="min-h-[200px] bg-sidebar-mobile bg-cover bg-no-repeat lg:w-full lg:basis-2/6 lg:rounded-lg lg:bg-sidebar-desktop">
       <div className="flex justify-center gap-6 pt-12 lg:flex-col lg:px-6">
