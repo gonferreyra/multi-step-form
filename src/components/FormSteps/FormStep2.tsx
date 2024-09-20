@@ -6,16 +6,12 @@ import PlanCard from '../../ui/PlanCard';
 import PlanSwitch from '../../ui/PlanSwitch';
 
 type FormStep2Props = {
-  // handleSelectPlan: (plan: string) => void;
-  // selectedPlan: string | null;
   planTime: string;
   isChecked: boolean;
   handleToggle: () => void;
 };
 
 export default function FormStep2({
-  // handleSelectPlan,
-  // selectedPlan,
   planTime,
   isChecked,
   handleToggle,
@@ -26,7 +22,6 @@ export default function FormStep2({
     watch,
     formState: { errors },
   } = useFormContext();
-  // console.log(formState);
 
   const selectedPlan = watch('selectedPlan');
 

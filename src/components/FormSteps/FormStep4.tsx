@@ -14,10 +14,7 @@ export default function FormStep4({
 }: FormStep4Props) {
   const { watch } = useFormContext();
 
-  // const { selectedAddOns, selectedPlan } = getValues();
-  // console.log(watch('selectedPlan'));
-
-  // Usa watch para observar los cambios de selectedAddOns y selectedPlan
+  // We use watch to observe changes on selectedAddOns and selectedPlan
   const selectedAddOns = watch('selectedAddOns', []);
   const selectedPlan = watch('selectedPlan', null);
 

@@ -139,8 +139,6 @@ export default function Form({ activeStep, handleActiveStep }: FormProps) {
         {/* Step 2 */}
         {activeStep === 2 ? (
           <FormStep2
-            // handleSelectPlan={handleSelectPlan}
-            // selectedPlan={selectedPlan}
             planTime={planTime}
             isChecked={isChecked}
             handleToggle={handleToggle}
@@ -148,8 +146,6 @@ export default function Form({ activeStep, handleActiveStep }: FormProps) {
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
             <FormStep2
-              // handleSelectPlan={handleSelectPlan}
-              // selectedPlan={selectedPlan}
               planTime={planTime}
               isChecked={isChecked}
               handleToggle={handleToggle}
