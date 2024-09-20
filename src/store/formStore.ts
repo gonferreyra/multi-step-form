@@ -1,12 +1,19 @@
 import { create } from 'zustand';
 import createSelectors from './selectors';
 
-type Store = {
+type FormStore = {
   activeStep: number;
+  setActiveStep: (step: number) => void;
 };
 
-const formStore = create<Store>()((set) => ({
+const useFormStore = create<FormStore>()((set) => ({
   activeStep: 1,
+  setActiveStep: (step) => {
+    set((state) => ({
+      ...state,
+      activeStep: step,
+    }));
+  },
 }));
 
-export default createSelectors(formStore);
+export default createSelectors(useFormStore);
