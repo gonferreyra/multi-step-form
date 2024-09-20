@@ -18,7 +18,7 @@ export default function FormStep1() {
   } = useFormContext<FormValues>();
 
   return (
-    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-full lg:px-0 lg:shadow-none">
+    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-[380px] lg:px-0 lg:py-10 lg:shadow-none">
       <FormTitle>Personal info</FormTitle>
 
       <FormSubtitle>

@@ -29,16 +29,18 @@ export default function AddOnCard({
   }, [selected]);
 
   const handleToggle = () => {
-    // setAddOnSelected(!addOnSelected);
     setValue(`selectedAddOns.${name}`, !addOnSelected);
     onSelect(name, !addOnSelected);
   };
 
   return (
     <div
-      className={clsx('flex items-center gap-4 rounded-md border px-4 py-3', {
-        'border-purplish-blue': addOnSelected,
-      })}
+      className={clsx(
+        'flex items-center gap-4 rounded-md border px-4 py-3 hover:border-purplish-blue',
+        {
+          'border-purplish-blue bg-pastel-blue/10': addOnSelected,
+        },
+      )}
       onClick={handleToggle}
     >
       <div>

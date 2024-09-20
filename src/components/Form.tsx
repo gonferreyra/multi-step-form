@@ -187,7 +187,7 @@ export default function Form({ activeStep, handleActiveStep }: FormProps) {
 
         {/* Buttons */}
         {activeStep !== 5 && (
-          <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2">
+          <div className="mt-auto flex w-full items-center justify-between bg-alabaster px-2 lg:px-0">
             {activeStep > 1 && (
               <button
                 type="button"

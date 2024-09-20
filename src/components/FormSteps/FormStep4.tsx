@@ -46,7 +46,7 @@ export default function FormStep4({
   };
 
   return (
-    <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
+    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-[380px] lg:px-0 lg:py-10 lg:shadow-none">
       <FormTitle>Finishing up</FormTitle>
       <FormSubtitle>
         Double-check everything looks <span className="uppercase">ok</span>{' '}
@@ -61,7 +61,7 @@ export default function FormStep4({
             </p>
             <button
               type="button"
-              className="text-sm font-semibold text-cool-gray underline"
+              className="text-sm font-semibold text-cool-gray underline hover:text-purplish-blue"
               onClick={() => handleActiveStep(2)}
             >
               Change

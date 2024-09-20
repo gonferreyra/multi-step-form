@@ -7,7 +7,12 @@ type FormTitleProps = {
 
 export default function FormTitle({ children, className }: FormTitleProps) {
   return (
-    <h1 className={cn('text-2xl font-extrabold text-marine-blue', className)}>
+    <h1
+      className={cn(
+        'text-2xl font-extrabold text-marine-blue lg:text-4xl',
+        className,
+      )}
+    >
       {children}
     </h1>
   );

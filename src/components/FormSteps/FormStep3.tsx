@@ -15,8 +15,8 @@ export default function FormStep3({
   handleSelectAddOn,
 }: FormStep3Props) {
   return (
-    <div className="mx-auto flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6">
-      <FormTitle>Add-ons</FormTitle>
+    <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-[380px] lg:px-0 lg:py-10 lg:shadow-none">
+      <FormTitle>Pick add-ons</FormTitle>
       <FormSubtitle>Add-ons help enhace your gaming experience.</FormSubtitle>
 
       {addOns.map((addon) => (
