@@ -1,50 +1,65 @@
-# React + TypeScript + Vite
+# Multi-step Form App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a solution to the [Multi-step form challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/multistep-form-YVAnSdqQBJ).
 
-Currently, two official plugins are available:
+## Table of contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Multi-step Form App](#multi-step-form-app)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [The challenge](#the-challenge)
+    - [Screenshot](#screenshot)
+    - [Mobile 375px](#mobile-375px)
+    - [Small Desktop 15" 1351px](#small-desktop-15-1351px)
+    - [Large Desktop MacBook Pro 1440px](#large-desktop-macbook-pro-1440px)
+  - [My process](#my-process)
+    - [Built with](#built-with)
+  - [Author](#author)
 
-## Expanding the ESLint configuration
+## Overview
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### The challenge
 
-- Configure the top-level `parserOptions` property like this:
+Users should be able to:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Complete each step of the sequence
+- Go back to a previous step to update their selections
+- See a summary of their selections on the final step and confirm their order
+- View the optimal layout for the interface depending on their device's screen size
+- See hover and focus states for all interactive elements on the page
+- Receive form validation messages if:
+  - A field has been missed
+  - The email address is not formatted correctly
+  - A step is submitted, but no selection has been made
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### Screenshot
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Mobile 375px
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![](/preview/iPhone%206-7-8-1727099363770.jpeg)
+![](preview/iPhone%206-7-8-1727099467055.jpeg)
+
+### Small Desktop 15" 1351px
+
+![](/preview/Laptop%2015"-1727099582756.jpeg)
+![](/preview/Laptop%2015"-1727099585908.jpeg)
+
+### Large Desktop MacBook Pro 1440px
+
+![](/preview/MacBook%20Pro-1727099495825.jpeg)
+![](/preview/MacBook%20Pro-1727099520778.jpeg)
+
+## My process
+
+### Built with
+
+- [React](https://reactjs.org/) - JS library
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/) - CSS library
+- [Zustand](https://github.com/pmndrs/zustand) - Global State management
+- [React-Hook-Form](https://react-hook-form.com/)
+- Mobile-first workflow
+
+## Author
+
+- LinkedIn: [Gonzalo](https://www.linkedin.com/in/ferreyragonzalo/)
