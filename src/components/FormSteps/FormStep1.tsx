@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
+// import { DevTool } from '@hookform/devtools';
 import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
 import clsx from 'clsx';
@@ -13,7 +13,7 @@ type FormValues = {
 export default function FormStep1() {
   const {
     register,
-    control,
+    // control,
     formState: { errors },
   } = useFormContext<FormValues>();
 
@@ -127,7 +127,7 @@ export default function FormStep1() {
           )}
         />
       </div>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </div>
   );
 }
