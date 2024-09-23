@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   FormStep1,
   FormStep2,
@@ -8,6 +7,7 @@ import {
 } from './FormSteps';
 import { FormProvider, useForm } from 'react-hook-form';
 import useStore from '../store/formStore';
+import { useState } from 'react';
 
 type FormValues = {
   name: string;
@@ -18,6 +18,7 @@ type FormValues = {
 };
 
 export default function Form() {
+  // react-hook-form
   const methods = useForm<FormValues>({
     // initialice only this value
     defaultValues: {
@@ -28,25 +29,13 @@ export default function Form() {
   const {
     formState: { errors },
   } = methods;
+
+  // zustand
   const activeStep = useStore.use.activeStep();
   const handleActiveStep = useStore.use.setActiveStep();
 
-  // See if i can remove one of this states
-  const [planTime, setPlanTime] = useState('monthly');
-  const [isChecked, setIsChecked] = useState(false);
-
-  //  second step
-  // const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-  // console.log(selectedPlan);
-
   // third step
   const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
-
-  // month or year toggle
-  const handleToggle = () => {
-    setIsChecked(!isChecked);
-    setPlanTime(isChecked ? 'monthly' : 'yearly');
-  };
 
   // third step
   const handleSelectAddOn = (name: string, selected: boolean) => {
@@ -101,13 +90,14 @@ export default function Form() {
     console.log(data);
 
     if (!isFormValid) {
-      // Redirect to the first error step - Unused for now since the form is validated on every step
+      // Unused since the form is validated on every step - kept for practice
+      // Redirect to the first error step
       if (errors.name || errors.email || errors.phonenumber) {
         handleActiveStep(1); // Redirige al primer paso
       } else if (errors.selectedPlan) {
-        handleActiveStep(2); // Redirige al segundo paso si el plan no está seleccionado
-        // } else if (errors.selectedAddOns) {
-        //   handleActiveStep(3); // Redirige al tercer paso si falta algo en los add-ons
+        handleActiveStep(2); // Redirect to second step if validation fails there
+      } else if (errors.selectedAddOns) {
+        handleActiveStep(3); // Redirige al tercer paso si falta algo en los add-ons
       }
 
       console.log('Errores en el formulario. No se puede continuar.');
@@ -136,32 +126,24 @@ export default function Form() {
 
         {/* Step 2 */}
         {activeStep === 2 ? (
-          <FormStep2
-            planTime={planTime}
-            isChecked={isChecked}
-            handleToggle={handleToggle}
-          />
+          <FormStep2 />
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
-            <FormStep2
-              planTime={planTime}
-              isChecked={isChecked}
-              handleToggle={handleToggle}
-            />
+            <FormStep2 />
           </div>
         )}
 
         {/* Step 3 */}
         {activeStep === 3 ? (
           <FormStep3
-            planTime={planTime}
+            // planTime={planTime}
             selectedAddOns={selectedAddOns}
             handleSelectAddOn={handleSelectAddOn}
           />
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
             <FormStep3
-              planTime={planTime}
+              // planTime={planTime}
               selectedAddOns={selectedAddOns}
               handleSelectAddOn={handleSelectAddOn}
             />
@@ -170,13 +152,10 @@ export default function Form() {
 
         {/* Step 4 */}
         {activeStep === 4 ? (
-          <FormStep4 planTime={planTime} handleActiveStep={handleActiveStep} />
+          <FormStep4 />
         ) : (
           <div className="absolute h-0 w-0 overflow-hidden">
-            <FormStep4
-              planTime={planTime}
-              handleActiveStep={handleActiveStep}
-            />
+            <FormStep4 />
           </div>
         )}
 

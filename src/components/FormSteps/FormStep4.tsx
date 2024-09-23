@@ -1,22 +1,19 @@
 import { useFormContext } from 'react-hook-form';
+import useStore from '../../store/formStore';
 import { addOns, plans } from '../../lib/constants';
 import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
 
-type FormStep4Props = {
-  planTime: string;
-  handleActiveStep: (step: number) => void;
-};
-
-export default function FormStep4({
-  planTime,
-  handleActiveStep,
-}: FormStep4Props) {
+export default function FormStep4() {
+  // rhf
   const { watch } = useFormContext();
-
   // We use watch to observe changes on selectedAddOns and selectedPlan
   const selectedAddOns = watch('selectedAddOns', []);
   const selectedPlan = watch('selectedPlan', null);
+
+  // zustand
+  const handleActiveStep = useStore.use.setActiveStep();
+  const planTime = useStore.use.planTime();
 
   const getPlanPrice = () => {
     const plan = plans.find((a) => a.name === selectedPlan);
@@ -46,7 +43,7 @@ export default function FormStep4({
   };
 
   return (
-    // padding in relation to other divs in the form is diferente on y axis
+    // padding in relation to other divs in the form is diferente on "y" axis
     <div className="mx-auto mb-4 flex w-[90%] max-w-[500px] flex-col gap-4 rounded-xl bg-alabaster px-4 py-6 shadow-md lg:w-[380px] lg:px-0 lg:pb-0 lg:pt-10 lg:shadow-none">
       <FormTitle>Finishing up</FormTitle>
       <FormSubtitle>

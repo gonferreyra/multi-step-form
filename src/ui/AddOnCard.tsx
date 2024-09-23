@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { useFormContext } from 'react-hook-form';
+import useStore from '../store/formStore';
 
 type AddOnCardProps = {
   name: string;
   description: string;
   priceMonth: number;
   priceYear: number;
-  planTime: string;
   onSelect: (name: string, selected: boolean) => void;
   selected: boolean;
 };
@@ -18,11 +18,12 @@ export default function AddOnCard({
   description,
   priceMonth,
   priceYear,
-  planTime,
   selected,
 }: AddOnCardProps) {
   const { register, setValue } = useFormContext();
   const [addOnSelected, setAddOnSelected] = useState(selected);
+  // zustand
+  const planTime = useStore.use.planTime();
 
   useEffect(() => {
     setAddOnSelected(selected);
@@ -60,8 +61,8 @@ export default function AddOnCard({
         <div>
           <p className="text-sm font-medium text-purplish-blue">
             <span>
-              {planTime === 'month' && `$${priceMonth}/mo`}
-              {planTime === 'year' && `$${priceYear}/yr`}
+              {planTime === 'monthly' && `$${priceMonth}/mo`}
+              {planTime === 'yearly' && `$${priceYear}/yr`}
             </span>
           </p>
         </div>

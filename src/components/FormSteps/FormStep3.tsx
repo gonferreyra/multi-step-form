@@ -4,13 +4,11 @@ import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
 
 type FormStep3Props = {
-  planTime: string;
   selectedAddOns: string[];
   handleSelectAddOn: (addOn: string, selected: boolean) => void;
 };
 
 export default function FormStep3({
-  planTime,
   selectedAddOns,
   handleSelectAddOn,
 }: FormStep3Props) {
@@ -23,7 +21,6 @@ export default function FormStep3({
         <AddOnCard
           key={addon.name}
           {...addon}
-          planTime={planTime}
           selected={selectedAddOns.includes(addon.name)}
           onSelect={handleSelectAddOn}
         />

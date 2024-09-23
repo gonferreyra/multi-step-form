@@ -1,21 +1,13 @@
 import { useFormContext } from 'react-hook-form';
+import useStore from '../../store/formStore';
 import { plans } from '../../lib/constants';
 import FormSubtitle from '../../ui/FormSubtitle';
 import FormTitle from '../../ui/FormTitle';
 import PlanCard from '../../ui/PlanCard';
 import PlanSwitch from '../../ui/PlanSwitch';
 
-type FormStep2Props = {
-  planTime: string;
-  isChecked: boolean;
-  handleToggle: () => void;
-};
-
-export default function FormStep2({
-  planTime,
-  isChecked,
-  handleToggle,
-}: FormStep2Props) {
+export default function FormStep2() {
+  // rhf
   const {
     register,
     setValue,
@@ -23,10 +15,21 @@ export default function FormStep2({
     formState: { errors },
   } = useFormContext();
 
+  // zustand
+  const isChecked = useStore.use.isChecked();
+  const setIsChecked = useStore.use.setIsChecked();
+  const planTime = useStore.use.planTime();
+  const setPlanTime = useStore.use.setPlanTime();
+
   const selectedPlan = watch('selectedPlan');
 
   const handleSelectPlan = (plan: string) => {
     setValue('selectedPlan', plan); // update value in form
+  };
+
+  const handleToggle = () => {
+    setIsChecked();
+    setPlanTime(isChecked ? 'monthly' : 'yearly');
   };
 
   return (
